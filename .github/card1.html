@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <title>귀여운 캐릭터</title>
+  <style>
+    body {
+      margin: 0;
+      overflow: hidden;
+      background: #f0f8ff;
+    }
+    #character {
+      width: 100px;
+      height: 100px;
+      background: url('https://i.ibb.co/SrDMNwv/cute-character.png') no-repeat center/contain;
+      position: absolute;
+      top: 50%;
+      left: 0;
+      transform: translateY(-50%);
+    }
+  </style>
+</head>
+<body>
+
+  <div id="character"></div>
+
+  <script>
+    const character = document.getElementById('character');
+    let position = 0;
+    let direction = 1;
+
+    function jump() {
+      character.style.left = position + 'px';
+      character.style.top = 50 + Math.sin(position * 0.05) * 50 + '%';
+
+      position += 5 * direction;
+
+      if (position > window.innerWidth - 100 || position < 0) {
+        direction *= -1;
+      }
+
+      requestAnimationFrame(jump);
+    }
+
+    // 클릭하면 시작
+    character.addEventListener('click', () => {
+      jump();
+    });
+  </script>
+
+</body>
+</html>
